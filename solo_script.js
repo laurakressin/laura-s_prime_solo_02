@@ -1,6 +1,8 @@
 // ! ! !
 // Three Bugs
-
+//Bug #1: in line 18, var calculateSTI was entering the whole array, and not array[i]
+//Bug #2: in line 63, you only need to return the basePercent, without subtracting 1
+//Bug #3: in line 41, newArray[2] needed to multiply bonus and baseSalary and add it to the baseSalary.  I also changed the base Salary to have a parseInt, so it wouldn't be a string.
 var arrayAtticus = ["Atticus", "2405", "47000", 3];
 var arrayJem = ["Jem", "62347", "63500", 4];
 var arrayBoo = ["Boo", "11435", "54000", 3];
@@ -12,33 +14,29 @@ var array = [arrayAtticus, arrayJem, arrayBoo, arrayScout];
 var newEl, newText, position;
 //Capture the position of insertion into the DOM
 position = document.getElementById('content');
-
 //Loop the array, extracting each array and writing information to the DOM
 //Note that the information is not 'clean'
 for(var i = 0; i < array.length; i++){
-	array[i] = calculateSTI(array);
+	array[i] = calculateSTI(array[i]);
  	newEl = document.createElement('li');
-	newText = document.createTextNode(array[i]);
+	newText = document.createTextNode(array[i].join(', '));
 	newEl.appendChild(newText);
 	position.appendChild(newEl);
 }
 
 function calculateSTI(array){
   var newArray = [];
-
   newArray[0] = array[0];
-
   var employeeNumber = array[1];
-  var baseSalary = array[2];
+  var baseSalary = parseInt(array[2]);
   var reviewScore = array[3];
-
   var bonus = getBaseSTI(reviewScore) + getYearAdjustment(employeeNumber) - getIncomeAdjustment(baseSalary);
   if(bonus > 0.13){
     bonus = 0.13;
   }
 
   newArray[1] = bonus;
-  newArray[2] = baseSalary * (1.0 + bonus);
+  newArray[2] = baseSalary + (baseSalary * bonus);
   newArray[3] = baseSalary * bonus;
   console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
   return newArray;
@@ -63,7 +61,7 @@ function getBaseSTI(reviewScore){
       basePercent = 0.10;
       break;
   }
-  return basePercent - 1;
+  return basePercent;
 }
 
 function getYearAdjustment(employeeNumber){
