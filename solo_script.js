@@ -10,15 +10,11 @@ function employee(name, idNum, salary, reviewRating){
   this.reviewRating = reviewRating
 };
 
-var atticus = new employee("Atticus", "2405", "4700", 3);
+var atticus = new employee("Atticus", "2405", "47000", 3);
 var jem = new employee("Jem", "62347", "63500", 4);
 var boo = new employee("Boo", "11435", "54000", 3);
 var scout = new employee("Scout", "6243", "74750", 5);
 
-var arrayAtticus = ["Atticus", "2405", "47000", 3];
-var arrayJem = ["Jem", "62347", "63500", 4];
-var arrayBoo = ["Boo", "11435", "54000", 3];
-var arrayScout = ["Scout", "6243", "74750", 5];
 
 var array = [atticus, jem, boo, scout];
 
